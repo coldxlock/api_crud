@@ -8,7 +8,6 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
-
 ## Requerimentos
 
 * PHP 7 ou superior
@@ -23,14 +22,33 @@ CRUD Usuários (ACL) com [Laravel](http://laravel.com), o melhor framework PHP a
 
 * Instale o [Composer](https://getcomposer.org/download)
 * Clone o repositório: `git clone https://github.com/priscocleyton/api_crud.git`
-* Depois acesse a pasta API_CRUD, `cd api_crud`
+* Depois acesse a pasta MAPOS, `cd api_crud`
 * Instale as dependências `composer install`
 * Crie o arquivo de configuração de variáveis de ambiente `cp .env.example .env`
 * Configure as variáveis de ambiente e a conexão com o banco de dados no arquivo .env
 * Rode os seeders `php artisan migrate:fresh --seed`
 * Rode `php artisan key:generate`
 * Rode `php artisan serve` para iniciar o servidor.
-* Acesse o API_CRUD pelo no navegador: http://localhost:8000 ou url que você configurar.
+* Acesse o Map-OS no navegador: http://localhost:8000 ou url que você configurar.
+
+## Endpoints
+
+Requisições | Urls | Descrição | Parâmetros (headers)| Descrição no Collection | 
+--- | --- | --- | ---| ---
+ POST | http://localhost:8000/register | Retorna dados do usuário logado |  | USER REGISTER |
+ POST | http://localhost:8000/auth | Autenticação de login na API |  | USER AUTH |
+ GET | http://localhost:8000/me | Mostra dados do usuário logado | `` Bearer {{ access_token }} `` | USER ME |
+ GET | http://localhost:8000/logout | Retorna dados do usuário logado | `` Bearer {{ access_token }} `` | USER LOGOUT |
+ GET | http://localhost:8000/users | Retorna todos os usuários cadastrados | `` Bearer {{ access_token }} `` | USERS |
+ GET | http://localhost:8000/resources | Retorna todos os detalhes das permissões | `` Bearer {{ access_token }} `` | RESOURCE |
+ POST | http://localhost:8000/users/permissions | Cria permissões para um usuário | `` Bearer {{ access_token }} `` | CREATE PERMISSION USER |
+ GET | http://localhost:8000/users/{identify}/permissions | Verifica as permissões de um usuário | `` Bearer {{ access_token }} `` | USER PERMISSION |
+ GET | http://localhost:8000/users/{identify} | Retorna dados de um usuário pelo identify | `` Bearer {{ access_token }} `` | USER BY IDENTIFY |
+ PUT | http://localhost:8000/users/{identify} | Atualiza os dados de um usuário pelo identify | `` Bearer {{ access_token }} `` | USER |
+ DELETE | http://localhost:8000/users/{identify} | Exclui um usuário pelo identify | `` Bearer {{ access_token }} `` | USER |
+
+### Exemplo:
+<img src="https://uploaddeimagens.com.br/images/003/738/956/full/API_PRINT.png?1645475713" >
 
 ## Observações
 * Usuário (ADMIN): 
