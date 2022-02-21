@@ -30,7 +30,7 @@ CRUD Usuários (ACL) com [Laravel](http://laravel.com), o melhor framework PHP a
 * Rode os seeders `php artisan migrate:fresh --seed`
 * Rode `php artisan key:generate`
 * Rode `php artisan serve` para iniciar o servidor.
-* Acesse o Map-OS no navegador: http://localhost:8000 ou url que você configurar.
+* Acesse o API_CRUD pelo no navegador: http://localhost:8000 ou url que você configurar.
 
 ## Observações
 * Usuário (ADMIN): 
