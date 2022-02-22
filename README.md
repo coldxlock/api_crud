@@ -54,7 +54,7 @@ Requisições | Urls | Descrição | Parâmetros (headers)| Descrição no Colle
  DELETE | http://localhost:8000/users/{identify} | Exclui um usuário pelo identify | `` Bearer {{ access_token }} `` | USER |
 
 ### Exemplo:
-<img src="https://uploaddeimagens.com.br/images/003/738/956/full/API_PRINT.png?1645475713" >
+<img src="https://uploaddeimagens.com.br/images/003/739/569/full/API_PRINT_2.png?1645505918" >
 
 ## Observações
 * Apenas o usuário admin é criado no projeto por padrão. Os demais usuários precisam ser criados e depois atribuidos permissões, pois o usuário é criado sem permissão por padrão.
