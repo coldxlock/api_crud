@@ -22,10 +22,10 @@ class RegisterController extends Controller
         $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
         $user = $this->model->create($data);
-
+        $token_access = $user->createToken($request->device_name)->plainTextToken;
         return (new UserResource($user))
                     ->additional([
-                        'token' => $user->createToken($request->device_name)->plainTextToken,
+                        'token' => $token_access,
                     ]);
     }
 }

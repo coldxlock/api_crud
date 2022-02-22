@@ -41,12 +41,16 @@ class PermissionUserController extends Controller
         return response()->json(['message' => 'successs']);
     }
 
-    public function removePermissionsUser(Request $request)
+    public function removePermissionsUser(Request $request, $permission)
     {
-        $user = $this->user->where('uuid', $request->user)->firstOrFail();
+        if (Gate::denies('deletar_permissao_usuario')) {
+            abort(403, 'Not Authorized');
+        }
+        
+        $user = $this->user->where('uuid', $permission)->firstOrFail();
 
         if ($request->permission)
-            $user->permissions()->detach($request->permission);
+            $user->permissions()->detach($request->permissions);
 
         return response()->json(['message' => 'successs']);
     }

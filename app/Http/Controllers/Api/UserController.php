@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $this->model = $user;
 
-        $this->middleware('can:users');
+        $this->middleware('can:users');        
     }
 
     /**

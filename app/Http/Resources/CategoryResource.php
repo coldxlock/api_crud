@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class CategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +16,11 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'identify' => $this->uuid,
-            'name' => $this->name,
-            'email' => $this->email,
-            'permissions' => (in_array($this->email, config('acl.admins'))) ? 'Admin' : PermissionResource::collection($this->permissions),
+            'id' => $this->id,
+            'title' => $this->title,
+            'slug' => $this->url,
+            'description' => $this->description,
+            'date_created' => Carbon::make($this->created_at)->format('d/m/Y'),
         ];
     }
 }

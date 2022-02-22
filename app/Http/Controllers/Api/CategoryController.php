@@ -3,45 +3,111 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Services\CategoryService;
+use App\Http\Requests\StoreUpdateCategory;
+use App\Http\Resources\CategoryResource;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    protected $categoryService;
+    protected $repository;
 
-    public function __construct(CategoryService $categoryService)
+    public function __construct(Category $model)
     {
-        $this->categoryService = $categoryService;
-
-        $this->middleware('permission:visualizar_categorias')->only('index');
-        $this->middleware('permission:visualizar_categoria')->only('show');
-        $this->middleware('permission:deletar_categoria')->only('destroy');
-        $this->middleware('permission:editar_categoria')->only('update');
+        $this->repository = $model;       
     }
 
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        return $this->categoryService->getAllCategories($request->all());
+        if (Gate::denies('visualizar_categorias')) {
+            abort(403, 'Not Authorized');
+        }
+
+        $categories = $this->repository->get();
+
+        return CategoryResource::collection($categories);
     }
 
-    public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StoreUpdateCategory $request)
     {
-        return $this->categoryService->newCategory($request->all());
+        if (Gate::denies('criar_categoria')) {
+            abort(403, 'Not Authorized');
+        }
+
+        $data = $request->validated();
+
+        $data['url'] = Str::slug($data['title'],'-');
+        $category = $this->repository->create($data);
+
+        return new CategoryResource($category);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  string  $url
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
-        return $this->categoryService->getCategoryById($id);
+        if (Gate::denies('visualizar_categoria')) {
+            abort(403, 'Not Authorized');
+        }
+
+        $category = $this->repository->where('id', $id)->firstOrFail();
+
+        return new CategoryResource($category);
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $url
+     * @return \Illuminate\Http\Response
+     */
+    public function update(StoreUpdateCategory $request, $id)
     {
-        return $this->categoryService->updateCategory($id, $request->all());
+        if (Gate::denies('editar_categoria')) {
+            abort(403, 'Not Authorized');
+        }
+
+        $category = $this->repository->where('id', $id)->firstOrFail();
+
+        $category->update($request->validated());
+
+        return response()->json(['message' => 'success']);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  string  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
-        return $this->categoryService->deleteCategory($id);
+        if (Gate::denies('deletar_categoria')) {
+            abort(403, 'Not Authorized');
+        }
+
+        $category = $this->repository->where('id', $id)->firstOrFail();
+
+        $category->delete();
+
+        return response()->json(['message' => 'success'], 204);
     }
 }

@@ -16,7 +16,7 @@
 
 ## Framework
 
-CRUD Usuários (ACL) com [Laravel](http://laravel.com), o melhor framework PHP atualmente, como base.
+Esse projeto é um CRUD de Categorias e de Usuários utilizando ACL e Sanctum como autenticação feito em [Laravel](http://laravel.com), onde é possível criar usuários e atribuir permissiões aos mesmos.
 
 ## Instalação
 
@@ -35,13 +35,18 @@ CRUD Usuários (ACL) com [Laravel](http://laravel.com), o melhor framework PHP a
 
 Requisições | Urls | Descrição | Parâmetros (headers)| Descrição no Collection | 
 --- | --- | --- | ---| ---
- POST | http://localhost:8000/register | Retorna dados do usuário logado |  | USER REGISTER |
+ POST | http://localhost:8000/register | Retorna dados do usuário logado |  | CREATE USER  |
+ POST | http://localhost:8000/users/permissions | Cria permissões para um usuário | `` Bearer {{ access_token }} `` | CREATE  PERMISSION USER |
+ GET | http://localhost:8000/categories | Lista todas as categorias | `` Bearer {{ access_token }} `` | LIST ALL CATEGORIES |
+ GET | http://localhost:8000/categories/{id} | Lista categoria pelo id | `` Bearer {{ access_token }} `` | LIST CATEGORY BY ID |
+ POST | http://localhost:8000/categories | Cria Categoria | `` Bearer {{ access_token }} `` | CREATE CATEGORY |
+ DELETE | http://localhost:8000/categories/{id} | Deletar categoria pelo id | `` Bearer {{ access_token }} `` | DELETE CATEGORY |
+ PUT | http://localhost:8000/categories/{id} | Atualiza categoria pelo id | `` Bearer {{ access_token }} `` | UPDATE CATEGORY |
  POST | http://localhost:8000/auth | Autenticação de login na API |  | USER AUTH |
  GET | http://localhost:8000/me | Mostra dados do usuário logado | `` Bearer {{ access_token }} `` | USER ME |
  GET | http://localhost:8000/logout | Retorna dados do usuário logado | `` Bearer {{ access_token }} `` | USER LOGOUT |
  GET | http://localhost:8000/users | Retorna todos os usuários cadastrados | `` Bearer {{ access_token }} `` | USERS |
  GET | http://localhost:8000/resources | Retorna todos os detalhes das permissões | `` Bearer {{ access_token }} `` | RESOURCE |
- POST | http://localhost:8000/users/permissions | Cria permissões para um usuário | `` Bearer {{ access_token }} `` | CREATE PERMISSION USER |
  GET | http://localhost:8000/users/{identify}/permissions | Verifica as permissões de um usuário | `` Bearer {{ access_token }} `` | USER PERMISSION |
  GET | http://localhost:8000/users/{identify} | Retorna dados de um usuário pelo identify | `` Bearer {{ access_token }} `` | USER BY IDENTIFY |
  PUT | http://localhost:8000/users/{identify} | Atualiza os dados de um usuário pelo identify | `` Bearer {{ access_token }} `` | USER |
@@ -51,7 +56,9 @@ Requisições | Urls | Descrição | Parâmetros (headers)| Descrição no Colle
 <img src="https://uploaddeimagens.com.br/images/003/738/956/full/API_PRINT.png?1645475713" >
 
 ## Observações
+* Apenas o usuário admin é criado no projeto por padrão. Os demais usuários precisam ser criados e depois atribuidos permissões, pois o usuário é criado sem permissão por padrão.
+* Utilize as rotas ``http://localhost:8000/register (post)`` para criar usuário e ``http://localhost:8000/users/permissions (post)`` para atribuir permissões. Lembrando que no collection do insomnia na raiz do projeto já contém tudo, é so importar.
 * Usuário (ADMIN): 
     * email: priscocleyton@gmail.com 
      * senha: 123456
-* Na Raiz do projeto contém os colletions com as endpoints para o insomia para teste.
+* Na Raiz do projeto contém os collections com as endpoints para o insomia para teste.

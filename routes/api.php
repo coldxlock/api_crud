@@ -24,8 +24,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/users/can/{permission}', [PermissionUserController::class, 'userHasPermission']);
     Route::post('/users/permissions', [PermissionUserController::class, 'addPermissionsUser']);
-    Route::delete('/users/permissions', [PermissionUserController::class, 'removePermissionsUser'])->middleware('can:deletar_permissao_usuario');
+    Route::delete('/users/permissions/{permission}', [PermissionUserController::class, 'removePermissionsUser']);
     Route::get('/users/{identify}/permissions', [PermissionUserController::class, 'permissionsUser']);
+
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/categories/{id}', [CategoryController::class, 'show']);
+    Route::post('/categories', [CategoryController::class, 'store']);
+    Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
+    Route::put('/categories/{id}', [CategoryController::class, 'update']);
     
     Route::apiResource('/users', UserController::class);
 });

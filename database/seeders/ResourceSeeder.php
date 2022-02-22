@@ -18,13 +18,8 @@ class ResourceSeeder extends Seeder
         $category->permissions()->create(['name' => 'visualizar_categorias']);
         $category->permissions()->create(['name' => 'visualizar_categoria']);
         $category->permissions()->create(['name' => 'deletar_categoria']);
-        $category->permissions()->create(['name' => 'editar_categoria']);
-
-        $company = Resource::create(['name' => 'Empresas']);
-        $company->permissions()->create(['name' => 'visualizar_empresas']);
-        $company->permissions()->create(['name' => 'visualizar_empresa']);
-        $company->permissions()->create(['name' => 'deletar_empresa']);
-        $company->permissions()->create(['name' => 'editar_empresa']);
+        $category->permissions()->create(['name' => 'editar_categoria']);        
+        $category->permissions()->create(['name' => 'criar_categoria']);  
 
         $admin = Resource::create(['name' => 'Admins']);
         $admin->permissions()->create(['name' => 'users']);
