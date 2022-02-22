@@ -30,7 +30,7 @@ Esse projeto é um CRUD de Categorias e de Usuários utilizando ACL e Sanctum co
 * Rode os seeders `php artisan migrate:fresh --seed`
 * Rode `php artisan key:generate`
 * Rode `php artisan serve` para iniciar o servidor.
-* Acesse o Map-OS no navegador: http://localhost:8000 ou url que você configurar.
+* Acesse o API_CRUD no navegador: http://localhost:8000 ou url que você configurar.
 
 ## Endpoints
 
