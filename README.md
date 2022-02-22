@@ -23,7 +23,7 @@ Esse projeto é um CRUD de Categorias e de Usuários utilizando ACL e Sanctum co
 
 * Instale o [Composer](https://getcomposer.org/download)
 * Clone o repositório: `git clone https://github.com/priscocleyton/api_crud.git`
-* Depois acesse a pasta MAPOS, `cd api_crud`
+* Depois acesse a pasta API_CRUD, `cd api_crud`
 * Instale as dependências `composer install`
 * Crie o arquivo de configuração de variáveis de ambiente `cp .env.example .env`
 * Configure as variáveis de ambiente e a conexão com o banco de dados no arquivo .env
